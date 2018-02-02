@@ -34,16 +34,16 @@ module.exports = {
 [Notification.js](https://github.com/val-fom/webpack-learning/blob/b1246b08dc664e6fe315118f9172a8ded5d20ba8/src/Notification.js)  
 ```javascript
 function announce (message) {
-	alert(message);
+  alert(message);
 }
 
 function log (message) {
-	console.log(message);
+  console.log(message);
 }
 
 export default {
-	announce: announce,
-	log: log
+  announce: announce,
+  log: log
 }
 ```
 [main.js](https://github.com/val-fom/webpack-learning/blob/b1246b08dc664e6fe315118f9172a8ded5d20ba8/src/main.js)
@@ -60,19 +60,19 @@ loaders teaches webpack to read any kid of files
 
 ```jawascript
 module.exports = {
-	entry: './src/main.js',
-	output: {
-		path: path.resolve(__dirname, './dist'),
-		filename: 'bundle.js'
-	},
-	module: {
-		rules: [
-			{
-				test: /\.css$/,
-				use: ['style-loader', 'css-loader']
-			}
-		]
-	}
+  entry: './src/main.js',
+  output: {
+    path: path.resolve(__dirname, './dist'),
+    filename: 'bundle.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      }
+    ]
+  }
 };
 ```
 styles were injected directly in html
@@ -81,25 +81,25 @@ styles were injected directly in html
 `npm install babel-preset-env --save-dev`  
 ```jawascript
 module.exports = {
-	entry: './src/main.js',
-	output: {
-		path: path.resolve(__dirname, './dist'),
-		filename: 'bundle.js'
-	},
-	module: {
-		rules: [
-			{
-				test: /\.css$/,
-				use: ['style-loader', 'css-loader']
-			},
+  entry: './src/main.js',
+  output: {
+    path: path.resolve(__dirname, './dist'),
+    filename: 'bundle.js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      },
 
-			{ 
-				test: /\.js$/, 
-				exclude: /node_modules/, 
-				loader: "babel-loader"
-			}
-		]
-	}
+      { 
+        test: /\.js$/, 
+        exclude: /node_modules/, 
+        loader: "babel-loader"
+      }
+    ]
+  }
 };
 ```
 **.babelrc**
@@ -113,29 +113,29 @@ we can do this
 ```jawascript
 module.exports = {
 
-	entry: './src/main.js',
-	output: {
-		//---
-	},
+  entry: './src/main.js',
+  output: {
+    //---
+  },
 
-	module: {
-		//---
-	},
+  module: {
+    //---
+  },
 
-	plugins: [
-		new webpack.optimize.UglifyJsPlugin()
-	]
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin()
+  ]
 };
 ```
 but it is good for production code not for development
 so we leave empty plagins arey   
-	`plugins: []`
+  `plugins: []`
 and write if-statement
 ```javascript
 if (process.env.NODE_ENV === 'production') {
-	module.exports.plugins.push(
-			new webpack.optimize.UglifyJsPlugin()
-		)
+  module.exports.plugins.push(
+      new webpack.optimize.UglifyJsPlugin()
+    )
 }
 ```
 to test this we run
@@ -144,7 +144,7 @@ now bundle.js id minified
 
 finaly we udate package.json script
 ```javascript
-{	
+{ 
  "scripts": {
     "dev": "webpack",
     "production": "NODE_ENV=production webpack",
@@ -156,25 +156,25 @@ finaly we udate package.json script
 `$ npm install sass-loader node-sass --save-dev`
 ```javascript
 {
-	module: {
-		rules: [
+  module: {
+    rules: [
 
-			{
-				test: /\.s[ac]ss$/,
-				use: ['style-loader', 'css-loader', 'sass-loader']
-			},
+      {
+        test: /\.s[ac]ss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
+      },
 
-			{
-				test: /\.css$/,
-				use: ['style-loader', 'css-loader']
-			},
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      },
 
-			{ 
-				test: /\.js$/, 
-				exclude: /node_modules/, 
-				loader: "babel-loader"
-			}
-		]
-	}
+      { 
+        test: /\.js$/, 
+        exclude: /node_modules/, 
+        loader: "babel-loader"
+      }
+    ]
+  }
 ```
 now we just paste the styles into html

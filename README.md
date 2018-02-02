@@ -194,7 +194,7 @@ module.exports = {
   entry: {
     app: [
       './src/main.js',
-      './src/main.scss' // now we dont need to call require('./main.scss') in main.js
+      './src/main.scss' // now we don't need to call require('./main.scss') in main.js
     ]
   },
 
@@ -227,7 +227,7 @@ module.exports = {
 
     new ExtractTextPlugin("[name].css"),
 
-    new webpack.LoaderOptionsPlugin({ // to deside weather to minimize or not
+    new webpack.LoaderOptionsPlugin({ // to decide whether to minimize or not
       minimize: inProduction
     })
 

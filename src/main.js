@@ -1,7 +1,1 @@
-class Form {
-	constructor() {
-		alert('hihihi');
-	}
-}
-
-new Form();
+require('./main.scss');

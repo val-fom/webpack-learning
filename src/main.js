@@ -1,1 +1,7 @@
-require('./main.css');
+class Form {
+	constructor() {
+		alert('hihihi');
+	}
+}
+
+new Form();

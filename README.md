@@ -76,4 +76,35 @@ module.exports = {
 };
 ```
 styles were injected directly in html
+### 5. ES2015 Compilation With Babel
+`$ npm install --save-dev babel-loader babel-core`  
+`npm install babel-preset-env --save-dev`  
+```jawascript
+module.exports = {
+	entry: './src/main.js',
+	output: {
+		path: path.resolve(__dirname, './dist'),
+		filename: 'bundle.js'
+	},
+	module: {
+		rules: [
+			{
+				test: /\.css$/,
+				use: ['style-loader', 'css-loader']
+			},
 
+			{ 
+				test: /\.js$/, 
+				exclude: /node_modules/, 
+				loader: "babel-loader"
+			}
+		]
+	}
+};
+```
+**.babelrc**
+```jawascript
+{
+  "presets": ["env"]
+}
+```

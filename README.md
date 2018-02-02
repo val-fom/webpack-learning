@@ -152,4 +152,29 @@ finaly we udate package.json script
   }
 }
 ```
+### 7. Sass Compilation
+`$ npm install sass-loader node-sass --save-dev`
+```javascript
+{
+	module: {
+		rules: [
 
+			{
+				test: /\.s[ac]ss$/,
+				use: ['style-loader', 'css-loader', 'sass-loader']
+			},
+
+			{
+				test: /\.css$/,
+				use: ['style-loader', 'css-loader']
+			},
+
+			{ 
+				test: /\.js$/, 
+				exclude: /node_modules/, 
+				loader: "babel-loader"
+			}
+		]
+	}
+```
+now we just paste the styles into html

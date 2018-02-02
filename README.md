@@ -75,5 +75,5 @@ module.exports = {
 	}
 };
 ```
-styles were injected directli in html
+styles were injected directly in html
 

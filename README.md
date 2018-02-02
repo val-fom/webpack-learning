@@ -1,5 +1,6 @@
 # webpack-learning
 example from https://laracasts.com/series/webpack-for-everyone  
+
 ### 1. Zero Configuration Compilation
 `$ npm init -y`  
 `$ npm install webpack --save-dev`  
@@ -15,6 +16,7 @@ example from https://laracasts.com/series/webpack-for-everyone
 }
 ```
 `$ npm run watch`
+
 ### 2. A Dedicated Configuration File
 ```javascript
 var webpack = require('webpack');
@@ -29,6 +31,7 @@ module.exports = {
 };
 ```
 `$ npm run watch`
+
 ### 3. Modules Are Simply Files
 *see code*  
 [Notification.js](https://github.com/val-fom/webpack-learning/blob/b1246b08dc664e6fe315118f9172a8ded5d20ba8/src/Notification.js)  
@@ -53,6 +56,7 @@ import notification from './Notification';
 notification.log('here we go');
 notification.announce('here we go as an alert');
 ```
+
 ### 4. Loaders Are Transformers
 loaders teaches webpack to read any kid of files   
 `$ npm install css-loader --save-dev`
@@ -76,6 +80,7 @@ module.exports = {
 };
 ```
 styles were injected directly in html
+
 ### 5. ES2015 Compilation With Babel
 `$ npm install --save-dev babel-loader babel-core`  
 `npm install babel-preset-env --save-dev`  
@@ -108,6 +113,7 @@ module.exports = {
   "presets": ["env"]
 }
 ```
+
 ### 6. Minification and Environments
 we can do this
 ```jawascript
@@ -152,6 +158,7 @@ finaly we udate package.json script
   }
 }
 ```
+
 ### 7. Sass Compilation
 `$ npm install sass-loader node-sass --save-dev`
 ```javascript
@@ -178,3 +185,52 @@ finaly we udate package.json script
   }
 ```
 now we just paste the styles into html
+
+### 8. Extract CSS to a Dedicated File
+`npm install --save-dev extract-text-webpack-plugin`  
+```javascript
+module.exports = {
+
+  entry: {
+    app: [
+      './src/main.js',
+      './src/main.scss' // now we dont need to call require('./main.scss') in main.js
+    ]
+  },
+
+  output: {
+    path: path.resolve(__dirname, './dist'),
+    filename: '[name].js'
+  },
+
+  module: {
+    rules: [
+
+      {
+        test: /\.s[ac]ss$/,
+        use: ExtractTextPlugin.extract({
+          use: ['css-loader', 'sass-loader'],
+          fallback: 'style-loader'
+        })
+      },
+
+      { 
+        test: /\.js$/, 
+        exclude: /node_modules/, 
+        loader: "babel-loader"
+      }
+
+    ]
+  },
+
+  plugins: [
+
+    new ExtractTextPlugin("[name].css"),
+
+    new webpack.LoaderOptionsPlugin({ // to deside weather to minimize or not
+      minimize: inProduction
+    })
+
+  ]
+};
+```

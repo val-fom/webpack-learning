@@ -1,11 +1,11 @@
 # webpack-learning
 example from https://laracasts.com/series/webpack-for-everyone  
-### Zero Configuration Compilation
+### 1. Zero Configuration Compilation
 `$ npm init -y`  
 `$ npm install webpack --save-dev`  
 `$ webpack src/main.js dist/bundle.js`  
 `$ node_modules/.bin/webpack src/main.js dist/bundle.js --watch`  
-#### OR
+### OR
 ```javascript
 {
   "scripts": {
@@ -15,7 +15,7 @@ example from https://laracasts.com/series/webpack-for-everyone
 }
 ```
 `$ npm run watch`
-### A Dedicated Configuration File
+### 2. A Dedicated Configuration File
 ```javascript
 var webpack = require('webpack');
 var path = require('path');
@@ -29,7 +29,7 @@ module.exports = {
 };
 ```
 `$ npm run watch`
-### Modules Are Simply Files
+### 3. Modules Are Simply Files
 *see code*  
 [Notification.js](https://github.com/val-fom/webpack-learning/blob/b1246b08dc664e6fe315118f9172a8ded5d20ba8/src/Notification.js)  
 ```javascript
@@ -53,3 +53,27 @@ import notification from './Notification';
 notification.log('here we go');
 notification.announce('here we go as an alert');
 ```
+### 4. Loaders Are Transformers
+loaders teaches webpack to read any kid of files   
+`$ npm install css-loader --save-dev`
+`$ npm install style-loader --save-dev`
+
+```jawascript
+module.exports = {
+	entry: './src/main.js',
+	output: {
+		path: path.resolve(__dirname, './dist'),
+		filename: 'bundle.js'
+	},
+	module: {
+		rules: [
+			{
+				test: /\.css$/,
+				use: ['style-loader', 'css-loader']
+			}
+		]
+	}
+};
+```
+styles were injected directli in html
+

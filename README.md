@@ -108,3 +108,48 @@ module.exports = {
   "presets": ["env"]
 }
 ```
+### 6. Minification and Environments
+we can do this
+```jawascript
+module.exports = {
+
+	entry: './src/main.js',
+	output: {
+		//---
+	},
+
+	module: {
+		//---
+	},
+
+	plugins: [
+		new webpack.optimize.UglifyJsPlugin()
+	]
+};
+```
+but it is good for production code not for development
+so we leave empty plagins arey   
+	`plugins: []`
+and write if-statement
+```javascript
+if (process.env.NODE_ENV === 'production') {
+	module.exports.plugins.push(
+			new webpack.optimize.UglifyJsPlugin()
+		)
+}
+```
+to test this we run
+`$ NODE_ENV=production node_modules/.bin/webpack`  
+now bundle.js id minified
+
+finaly we udate package.json script
+```javascript
+{	
+ "scripts": {
+    "dev": "webpack",
+    "production": "NODE_ENV=production webpack",
+    "watch": "npm run build -- --watch"
+  }
+}
+```
+
